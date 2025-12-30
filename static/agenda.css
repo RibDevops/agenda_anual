@@ -1,8 +1,13 @@
-.evento.red { background: #c00000; color: white; }
-.evento.blue { background: #2f75b5; color: white; }
-.evento.yellow { background: #ffc000; }
-.evento.pink { background: #ff99cc; }
+.evento.red { background: #c00000; color: white; padding:2px 4px; margin-top:4px; border-radius:3px; font-size:0.85em; }
+.evento.blue { background: #2f75b5; color: white; padding:2px 4px; margin-top:4px; border-radius:3px; font-size:0.85em; }
+.evento.yellow { background: #ffc000; padding:2px 4px; margin-top:4px; border-radius:3px; font-size:0.85em; }
+.evento.pink { background: #ff99cc; padding:2px 4px; margin-top:4px; border-radius:3px; font-size:0.85em; }
 
 .fora-mes {
-    background: #eee;
+    background: #f6f6f6;
+    color: #888;
 }
+
+table.agenda { border-collapse: collapse; width: 100%; margin-bottom: 12px; }
+table.agenda td, table.agenda th { border: 1px solid #ccc; padding: 6px; vertical-align: top; width: 14.28%; }
+.dia-num { font-weight: bold; margin-bottom: 4px; }

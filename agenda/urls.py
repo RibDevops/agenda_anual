@@ -1,9 +1,9 @@
-from . import views
 from django.urls import path
+from . import views
 
 app_name = 'agenda'
-
 urlpatterns = [
-    # path('', views.home, name='home'),
-    path('agenda/', views.agenda_anual, name='agenda_anual'),
+    path('', views.agenda_anual, name='anual'),
+    path('gerar-pdf/', views.gerar_pdf, name='gerar_pdf'),
+    # path para upload/import se criar uma view web
 ]

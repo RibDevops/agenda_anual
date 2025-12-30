@@ -1,56 +1,60 @@
-<!-- coloque dentro do body, perto do topo -->
-<div>
-  <button id="btn-png">Exportar PNG</button>
-  <a href="{% url 'agenda:gerar_pdf' %}?ano={{ ano }}"><button>Gerar PDF</button></a>
-</div>
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Agenda {{ ano }}</title>
+  <link rel="stylesheet" href="{% static 'agenda.css' %}">
+  <style>
+    /* ajustes básicos para print & tela */
+    #calendario { padding: 10px; background: #fff; }
+    .controls { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <button id="btn-png">Exportar PNG</button>
+    <a href="{% url 'agenda:gerar_pdf' %}?ano={{ ano }}"><button>Gerar PDF</button></a>
+  </div>
 
-<!-- coloque o calendário dentro de div com id -->
-<div id="calendario">
-  
-<h1>Agenda {{ ano }}</h1>
+  <div id="calendario">
+    <h1>Agenda {{ ano }}</h1>
 
-{% for mes, semanas in calendario.items %}
-<h2>{{ mes }}</h2>
-
-<table class="agenda">
-    <tr>
-        <th>Dom</th><th>Seg</th><th>Ter</th>
-        <th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
-    </tr>
-
-    {% for semana in semanas %}
-    <tr>
-        {% for dia in semana %}
-        <td class="{% if dia.month != mes %}fora-mes{% endif %}">
-            {{ dia.day }}
-
+    {% for mes, semanas in calendario.items %}
+      <h2>{{ mes }}</h2>
+      <table class="agenda">
+        <tr>
+          <th>Dom</th><th>Seg</th><th>Ter</th>
+          <th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+        </tr>
+        {% for semana in semanas %}
+        <tr>
+          {% for dia in semana %}
+          <td class="{% if dia.month != mes %}fora-mes{% endif %}">
+            <div class="dia-num">{{ dia.day }}</div>
             {% if dia in eventos_por_data %}
-                {% for evento in eventos_por_data[dia] %}
-                    <div class="evento {{ evento.cor }}">
-                        {{ evento.titulo }}
-                    </div>
-                {% endfor %}
+              {% for evento in eventos_por_data[dia] %}
+                <div class="evento {{ evento.cor }}">{{ evento.titulo }}</div>
+              {% endfor %}
             {% endif %}
-        </td>
+          </td>
+          {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
+      </table>
     {% endfor %}
-</table>
-{% endfor %}
+  </div>
 
-</div>
-
-<!-- incluir html2canvas via CDN no fim do template -->
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script>
-document.getElementById('btn-png').addEventListener('click', function(){
-  html2canvas(document.getElementById('calendario'), {scale: 2}).then(function(canvas) {
-    var link = document.createElement('a');
-    link.download = 'calendario_{{ ano }}.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script>
+  document.getElementById('btn-png').addEventListener('click', function(){
+    html2canvas(document.getElementById('calendario'), {scale: 2}).then(function(canvas) {
+      var link = document.createElement('a');
+      link.download = 'calendario_{{ ano }}.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
   });
-});
-</script>
-
-
+  </script>
+</body>
+</html>
