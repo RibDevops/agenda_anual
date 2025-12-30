@@ -1,3 +1,12 @@
+<!-- coloque dentro do body, perto do topo -->
+<div>
+  <button id="btn-png">Exportar PNG</button>
+  <a href="{% url 'agenda:gerar_pdf' %}?ano={{ ano }}"><button>Gerar PDF</button></a>
+</div>
+
+<!-- coloque o calendário dentro de div com id -->
+<div id="calendario">
+  
 <h1>Agenda {{ ano }}</h1>
 
 {% for mes, semanas in calendario.items %}
@@ -28,3 +37,20 @@
     {% endfor %}
 </table>
 {% endfor %}
+
+</div>
+
+<!-- incluir html2canvas via CDN no fim do template -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+document.getElementById('btn-png').addEventListener('click', function(){
+  html2canvas(document.getElementById('calendario'), {scale: 2}).then(function(canvas) {
+    var link = document.createElement('a');
+    link.download = 'calendario_{{ ano }}.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+});
+</script>
+
+
