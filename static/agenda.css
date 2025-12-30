@@ -1,0 +1,8 @@
+.evento.red { background: #c00000; color: white; }
+.evento.blue { background: #2f75b5; color: white; }
+.evento.yellow { background: #ffc000; }
+.evento.pink { background: #ff99cc; }
+
+.fora-mes {
+    background: #eee;
+}

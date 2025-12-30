@@ -1,0 +1,30 @@
+<h1>Agenda {{ ano }}</h1>
+
+{% for mes, semanas in calendario.items %}
+<h2>{{ mes }}</h2>
+
+<table class="agenda">
+    <tr>
+        <th>Dom</th><th>Seg</th><th>Ter</th>
+        <th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+    </tr>
+
+    {% for semana in semanas %}
+    <tr>
+        {% for dia in semana %}
+        <td class="{% if dia.month != mes %}fora-mes{% endif %}">
+            {{ dia.day }}
+
+            {% if dia in eventos_por_data %}
+                {% for evento in eventos_por_data[dia] %}
+                    <div class="evento {{ evento.cor }}">
+                        {{ evento.titulo }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% endfor %}
