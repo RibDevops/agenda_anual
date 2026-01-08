@@ -49,9 +49,23 @@
         <div class="legenda-item"><div class="cor-box bg-red"></div> FERIADO</div>
         <div class="legenda-item"><div class="cor-box bg-blue"></div> ALTCOM</div>
     </div>
-    <!-- ... resto das seções ... -->
+    <div class="secao-box">
+        <div class="secao-titulo">PROJETO ATIVI</div>
+    </div>
+    <div class="secao-box">
+        <div class="secao-titulo">G</div>
+    </div>
+    <div class="secao-box">
+        <div class="secao-titulo">FORMATURAS</div>
+        {% for e in todos_eventos %}
+            {% if e.cor == 'pink' %}
+                <div class="legenda-item" style="color: #c00000; font-weight: bold;">
+                    {{ e.data|date:"d/m" }} - {{ e.titulo|upper }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
-{% endblock %}
 
 <div class="mt-4 text-center no-print">
   <button id="btn-png" class="btn btn-secondary">Exportar PNG</button>
@@ -61,7 +75,7 @@
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script>
 document.getElementById('btn-png').addEventListener('click', function(){
-  html2canvas(document.querySelector('.calendario-wrapper'), {scale: 2}).then(function(canvas) {
+  html2canvas(document.querySelector('.calendario-wrapper-95'), {scale: 2}).then(function(canvas) {
     var link = document.createElement('a');
     link.download = 'calendario_{{ ano }}.png';
     link.href = canvas.toDataURL('image/png');
