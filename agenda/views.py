@@ -1,7 +1,21 @@
-from django.shortcuts import render
-from datetime import date
+from django.shortcuts import render, redirect
+from datetime import date, datetime
 from .models import Evento
 from .calendario import gerar_calendario_anual
+
+def home(request):
+    return render(request, 'agenda/home.html')
+
+def adicionar_evento(request):
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        data_str = request.POST.get('data')
+        cor = request.POST.get('cor')
+        if titulo and data_str:
+            data_obj = datetime.strptime(data_str, '%Y-%m-%d').date()
+            Evento.objects.create(titulo=titulo, data=data_obj, cor=cor)
+            return redirect('agenda:agenda_anual')
+    return render(request, 'agenda/event.html')
 
 def agenda_anual(request):
     ano = int(request.GET.get('ano', date.today().year))
@@ -16,7 +30,8 @@ def agenda_anual(request):
     return render(request, 'agenda/anual.html', {
         'ano': ano,
         'calendario': calendario,
-        'eventos_por_data': eventos_por_data
+        'eventos_por_data': eventos_por_data,
+        'todos_eventos': eventos
     })
 
 

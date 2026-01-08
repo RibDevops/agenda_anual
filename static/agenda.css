@@ -1,59 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.calendario-header {
+    background-color: #d9e1f2;
+    border: 1px solid #8497b0;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .calendario-anual {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 2px;
+    padding: 10px;
+    background: white;
 }
 
 .mes-container {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
+    flex: 0 0 8.33%;
+    min-width: 100px;
+    border: 1px solid #ccc;
+}
+
+.mes-nome {
+    background-color: #d9e1f2;
+    text-align: center;
+    font-size: 0.8em;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
 }
 
 .agenda {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.7em;
 }
 
-.agenda th, .agenda td {
-    border: 1px solid #eee;
-    padding: 5px;
+.agenda th {
+    background-color: #f2f2f2;
+    font-weight: normal;
+}
+
+.agenda td {
+    border: 1px solid #ccc;
     text-align: center;
-    vertical-align: top;
-    height: 60px;
-    width: 14.28%;
+    height: 25px;
+    position: relative;
+    padding: 2px;
 }
 
 .dia-numero {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 2px;
+    z-index: 2;
+    position: relative;
 }
 
 .fora-mes {
-    color: #ccc;
     background-color: #f9f9f9;
+    color: #ccc;
 }
 
-.eventos-container {
+/* Cores de Eventos conforme imagem */
+.bg-red { background-color: #c00000 !important; color: white; }
+.bg-blue { background-color: #2f75b5 !important; color: white; }
+.bg-yellow { background-color: #ffc000 !important; }
+.bg-pink { background-color: #ff99cc !important; }
+.bg-green { background-color: #70ad47 !important; color: white; }
+.bg-orange { background-color: #ed7d31 !important; color: white; }
+.bg-purple { background-color: #7030a0 !important; color: white; }
+.bg-grey { background-color: #a5a5a5 !important; }
+
+/* Legenda e Seções Inferiores */
+.secoes-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 15px;
+    padding: 20px;
+}
+
+.secao-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 150px;
+}
+
+.secao-titulo {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.legenda-item {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.8em;
 }
 
-.evento {
-    font-size: 0.7em;
-    padding: 2px;
-    border-radius: 3px;
-    color: white;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.cor-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #000;
 }
-
-.evento.red { background: #c00000; color: white; }
-.evento.blue { background: #2f75b5; color: white; }
-.evento.yellow { background: #ffc000; color: black;}
-.evento.pink { background: #ff99cc; color: black;}

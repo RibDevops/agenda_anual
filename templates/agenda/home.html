@@ -1,28 +1,12 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% block content %}
- <!-- Page content -->
-
-
-
- 
-
- <div class="container mt-5">
-   <h1 class="mb-4">Bem-vindo ao Sistema de Escalas</h1>
-   <p>Este sistema foi desenvolvido para organizar e visualizar escalas de plantões de forma clara e intuitiva. O calendário mostra os plantões agendados para cada dia, e você pode navegar entre os meses usando os botões "Mês Anterior" e "Próximo Mês".</p>
-   
-   <h3 class="mt-4">Funcionalidades:</h3>
-   <ul>
-     <li><strong>Visualização de Plantões:</strong> Veja todos os eventos e escalas por dia.</li>
-     <li><strong>Criação de Plantões:</strong> Cadastre novos eventos clicando em “Novo Plantão”.</li>
-     <li><strong>Responsividade:</strong> A interface é adaptável para dispositivos móveis.</li>
-   </ul>
-   
-   <a href="{% url 'cal:calendar' %}" class="btn btn-primary mt-3">Ver Calendário</a>
- </div>
- 
- 
+<div class="container mt-5">
+    <h1>Bem-vindo à Agenda Anual</h1>
+    <p>Gerencie suas atividades e visualize o calendário completo.</p>
+    <div class="mt-4">
+        <a href="{% url 'agenda:agenda_anual' %}" class="btn btn-primary btn-lg">Ver Calendário Anual</a>
+        <a href="{% url 'agenda:adicionar_evento' %}" class="btn btn-success btn-lg">Adicionar Evento</a>
+    </div>
+</div>
 {% endblock %}
-
-
-

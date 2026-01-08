@@ -1,44 +1,27 @@
 {% load agenda_filters %}
-<!-- coloque dentro do body, perto do topo -->
-<div>
-  <button id="btn-png">Exportar PNG</button>
-  <a href="{% url 'agenda:gerar_pdf' %}?ano={{ ano }}"><button>Gerar PDF</button></a>
-</div>
 
-<!-- coloque o calendário dentro de div com id -->
-<div id="calendario">
-  
-<h1>Agenda {{ ano }}</h1>
+<div class="calendario-header">
+    CALENDÁRIO ANUAL DE ATIVIDADES - {{ ano }}
+</div>
 
 <div class="calendario-anual">
 {% for mes, semanas in calendario.items %}
 <div class="mes-container">
-    <h2>{{ mes }}</h2>
+    <div class="mes-nome">{{ mes|upper }}</div>
 
     <table class="agenda">
         <tr>
-            <th>Dom</th><th>Seg</th><th>Ter</th>
-            <th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+            <th>S</th><th>T</th><th>Q</th><th>Q</th><th>S</th><th>S</th><th>D</th>
         </tr>
 
         {% for semana in semanas %}
         <tr>
             {% for dia in semana %}
-            <td class="{% if dia.month != mes %}fora-mes{% endif %}">
+            {% with eventos=eventos_por_data|get_item:dia %}
+            <td class="{% if dia.month != mes %}fora-mes{% endif %} {% if eventos %}{% for ev in eventos %}bg-{{ ev.cor }} {% endfor %}{% endif %}">
                 <span class="dia-numero">{{ dia.day }}</span>
-
-                {% with eventos=eventos_por_data|get_item:dia %}
-                {% if eventos %}
-                    <div class="eventos-container">
-                    {% for evento in eventos %}
-                        <div class="evento {{ evento.cor }}" title="{{ evento.titulo }}">
-                            {{ evento.titulo|truncatechars:10 }}
-                        </div>
-                    {% endfor %}
-                    </div>
-                {% endif %}
-                {% endwith %}
             </td>
+            {% endwith %}
             {% endfor %}
         </tr>
         {% endfor %}
@@ -47,6 +30,29 @@
 {% endfor %}
 </div>
 
+<div class="secoes-container">
+    <div class="secao-box">
+        <div class="secao-titulo">LEGENDA</div>
+        <div class="legenda-item"><div class="cor-box bg-red"></div> FERIADO</div>
+        <div class="legenda-item"><div class="cor-box bg-blue"></div> ALTCOM</div>
+        <!-- Adicionar mais conforme necessário -->
+    </div>
+    <div class="secao-box">
+        <div class="secao-titulo">PROJETO ATIVI</div>
+    </div>
+    <div class="secao-box">
+        <div class="secao-titulo">G</div>
+    </div>
+    <div class="secao-box">
+        <div class="secao-titulo">FORMATURAS</div>
+        {% for e in todos_eventos %}
+            {% if e.cor == 'pink' %}
+                <div class="legenda-item" style="color: #c00000; font-weight: bold;">
+                    {{ e.data|date:"d/m" }} - {{ e.titulo|upper }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 
 <!-- incluir html2canvas via CDN no fim do template -->

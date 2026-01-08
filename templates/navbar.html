@@ -1,31 +1,21 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <!-- Logo/Brand -->
-        <a class="navbar-brand" href="{% url 'escala:home' %}">Home</a>
-        
-        <!-- Botão Toggler para Offcanvas -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <a class="navbar-brand" href="{% url 'agenda:home' %}">Minha Escala</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
-        <!-- Offcanvas Menu -->
-        <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="offcanvasNavbar">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title">Menu</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div class="navbar-nav">
-                   
-                        <a class="nav-link" href="{% url 'cal:calendar' %}">Calendário</a>
-                        <a class="nav-link" href="{% url 'cal:event_new' %}">Novo Plantão</a>
-                        <a class="nav-link" href="{% url 'cal:listar_eventos' %}">Lista de Plantões</a>
-                        
-                    
-                        <a class="nav-link" href="#">Login</a>
-                   
-                </div>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'agenda:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'agenda:agenda_anual' %}">Calendário Anual</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'agenda:adicionar_evento' %}">Novo Evento</a>
+                </li>
+            </ul>
         </div>
     </div>
-  </nav>
+</nav>
