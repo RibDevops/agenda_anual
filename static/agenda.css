@@ -1,8 +1,59 @@
-.evento.red { background: #c00000; color: white; }
-.evento.blue { background: #2f75b5; color: white; }
-.evento.yellow { background: #ffc000; }
-.evento.pink { background: #ff99cc; }
+.calendario-anual {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.mes-container {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.agenda {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.agenda th, .agenda td {
+    border: 1px solid #eee;
+    padding: 5px;
+    text-align: center;
+    vertical-align: top;
+    height: 60px;
+    width: 14.28%;
+}
+
+.dia-numero {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2px;
+}
 
 .fora-mes {
-    background: #eee;
+    color: #ccc;
+    background-color: #f9f9f9;
 }
+
+.eventos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.evento {
+    font-size: 0.7em;
+    padding: 2px;
+    border-radius: 3px;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.evento.red { background: #c00000; color: white; }
+.evento.blue { background: #2f75b5; color: white; }
+.evento.yellow { background: #ffc000; color: black;}
+.evento.pink { background: #ff99cc; color: black;}
