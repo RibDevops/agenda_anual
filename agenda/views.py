@@ -7,6 +7,7 @@ def home(request):
     return render(request, 'agenda/home.html')
 
 def adicionar_evento(request):
+    data_pre_preenchida = request.GET.get('data')
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
         data_str = request.POST.get('data')
@@ -15,7 +16,7 @@ def adicionar_evento(request):
             data_obj = datetime.strptime(data_str, '%Y-%m-%d').date()
             Evento.objects.create(titulo=titulo, data=data_obj, cor=cor)
             return redirect('agenda:agenda_anual')
-    return render(request, 'agenda/event.html')
+    return render(request, 'agenda/event.html', {'data_pre_preenchida': data_pre_preenchida})
 
 def agenda_anual(request):
     ano = int(request.GET.get('ano', date.today().year))
