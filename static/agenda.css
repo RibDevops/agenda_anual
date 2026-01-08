@@ -20,15 +20,34 @@ body {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 2px;
+    gap: 0;
     padding: 10px;
     background: white;
+    justify-content: flex-start;
+    border: 1px solid #000;
 }
 
 .mes-container {
-    flex: 0 0 8.33%;
-    min-width: 100px;
-    border: 1px solid #ccc;
+    flex: 1 0 8.33%;
+    min-width: 140px;
+    border-right: 1px solid #000;
+}
+
+.mes-container:last-child {
+    border-right: none;
+}
+
+.agenda td.mes-correto {
+    background-color: transparent;
+}
+
+.calendario-wrapper {
+    background: white;
+    padding: 10px;
+}
+
+@media print {
+    .no-print { display: none; }
 }
 
 .mes-nome {
