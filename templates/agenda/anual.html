@@ -1,3 +1,4 @@
+{% load agenda_filters %}
 <!-- coloque dentro do body, perto do topo -->
 <div>
   <button id="btn-png">Exportar PNG</button>
@@ -9,34 +10,42 @@
   
 <h1>Agenda {{ ano }}</h1>
 
+<div class="calendario-anual">
 {% for mes, semanas in calendario.items %}
-<h2>{{ mes }}</h2>
+<div class="mes-container">
+    <h2>{{ mes }}</h2>
 
-<table class="agenda">
-    <tr>
-        <th>Dom</th><th>Seg</th><th>Ter</th>
-        <th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
-    </tr>
+    <table class="agenda">
+        <tr>
+            <th>Dom</th><th>Seg</th><th>Ter</th>
+            <th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th>
+        </tr>
 
-    {% for semana in semanas %}
-    <tr>
-        {% for dia in semana %}
-        <td class="{% if dia.month != mes %}fora-mes{% endif %}">
-            {{ dia.day }}
+        {% for semana in semanas %}
+        <tr>
+            {% for dia in semana %}
+            <td class="{% if dia.month != mes %}fora-mes{% endif %}">
+                <span class="dia-numero">{{ dia.day }}</span>
 
-            {% if dia in eventos_por_data %}
-                {% for evento in eventos_por_data[dia] %}
-                    <div class="evento {{ evento.cor }}">
-                        {{ evento.titulo }}
+                {% with eventos=eventos_por_data|get_item:dia %}
+                {% if eventos %}
+                    <div class="eventos-container">
+                    {% for evento in eventos %}
+                        <div class="evento {{ evento.cor }}" title="{{ evento.titulo }}">
+                            {{ evento.titulo|truncatechars:10 }}
+                        </div>
+                    {% endfor %}
                     </div>
-                {% endfor %}
-            {% endif %}
-        </td>
+                {% endif %}
+                {% endwith %}
+            </td>
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
-</table>
+    </table>
+</div>
 {% endfor %}
+</div>
 
 </div>
 
